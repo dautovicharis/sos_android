@@ -1,34 +1,33 @@
 package dh.sos
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.Keep
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.Fragment
 
 class PermissionsDelegateUtil {
-    fun hasCameraPermission(fragment: FragmentActivity): Boolean {
+    fun hasCameraPermission(fragment: Context): Boolean {
         return ContextCompat.checkSelfPermission(
-                fragment,
-                Manifest.permission.CAMERA
+            fragment,
+            Manifest.permission.CAMERA
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun requestCameraPermission(fragment: FragmentActivity) {
-        ActivityCompat.requestPermissions(
-                fragment,
-                arrayOf(Manifest.permission.CAMERA),
-                REQUEST_PERMISSIONS_CAMERA
+    fun requestCameraPermission(fragment: Fragment) {
+        fragment.requestPermissions(
+            arrayOf(Manifest.permission.CAMERA),
+            PermissionsDelegateUtil.REQUEST_PERMISSIONS_CAMERA
         )
     }
 
     fun resultGranted(
-            fragment: FragmentActivity, requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
+        fragment: Fragment, requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
     ): PermissionResult {
         if (requestCode != REQUEST_PERMISSIONS_CAMERA) {
             Log.d(RESULT_TAG, "requestCode does not match")

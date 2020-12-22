@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main"
+    app:startDestination="@id/fragmentTransition">
+
+    <fragment android:id="@+id/fragmentPermission"
+        android:name="dh.sos.PermissionFragment"/>
+
+    <fragment android:id="@+id/fragmentTransition"
+        android:name="dh.sos.TransitionFragment"/>
+
+</navigation>

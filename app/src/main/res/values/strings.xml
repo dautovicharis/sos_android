@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">StackOverflowSolutions</string>
+    <string name="you_have_permission">You have permission</string>
+    <string name="you_dont_have_permission">You dont have permission</string>
 </resources>
