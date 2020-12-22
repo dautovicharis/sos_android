@@ -12,13 +12,12 @@
         android:supportsRtl="true"
 
         android:theme="@style/Theme.StackOverflowSolutions">
-        <activity android:name="dh.sos.MainActivity" android:launchMode="singleInstance" android:excludeFromRecents="true">
+        <activity android:name="dh.sos.MainActivity" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
     </application>
 

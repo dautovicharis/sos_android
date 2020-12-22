@@ -1,15 +1,9 @@
 package dh.sos
 
-import android.Manifest
-import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.idenfy.permissionissue.R
 
 class MainActivity : AppCompatActivity() {
@@ -21,8 +15,9 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             if (!permissionsDelegateUtil.hasCameraPermission(this))
                 permissionsDelegateUtil.requestCameraPermission(this)
+        } else {
+            recreateMainActivity()
         }
-
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -47,5 +42,16 @@ class MainActivity : AppCompatActivity() {
             PermissionResult.PermissionNotGrantedDontAsk -> {
             }
         }
+    }
+
+    private fun recreateMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
+                Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                Intent.FLAG_ACTIVITY_NO_ANIMATION or
+                Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+
+        startActivity(intent)
     }
 }
