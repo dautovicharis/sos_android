@@ -18,8 +18,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d(PermissionsDelegateUtil.RESULT_TAG, "onCreate")
-        if (!permissionsDelegateUtil.hasCameraPermission(this))
-            permissionsDelegateUtil.requestCameraPermission(this)
+        if (savedInstanceState == null) {
+            if (!permissionsDelegateUtil.hasCameraPermission(this))
+                permissionsDelegateUtil.requestCameraPermission(this)
+        }
 
     }
 
