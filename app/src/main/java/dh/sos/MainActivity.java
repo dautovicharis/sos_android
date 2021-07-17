@@ -1,12 +1,13 @@
 package dh.sos;
 
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,14 +17,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final ImageView imageView = findViewById(R.id.iv);
-        final View dynamicView = ((View) findViewById(R.id.dynamicView));
         final SeekBar seekbar = findViewById(R.id.simpleSeekBar);
+
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) dynamicView.getLayoutParams();
-                params.setMarginStart(imageView.getWidth() * progress / 100);
-                dynamicView.setLayoutParams(params);
+                addOverlay(R.drawable.overlay, imageView, imageView.getWidth() * progress / 100);
             }
 
             @Override
@@ -34,5 +33,15 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
+
+        // Initial overlay
+        imageView.post(() -> addOverlay(R.drawable.overlay, imageView, 0));
+    }
+
+    private void addOverlay(int resourceId, ImageView imageView, int startMargin) {
+        imageView.getOverlay().clear();
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), resourceId, null);
+        drawable.setBounds(new Rect(startMargin, 0, imageView.getWidth(), imageView.getHeight()));
+        imageView.getOverlay().add(drawable);
     }
 }
