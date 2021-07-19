@@ -1,14 +1,12 @@
 package dh.sos.entities
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 
 data class Address (
-    val street: String,
-    val suite: String,
-    val city: String,
-    val zipcode: String,
-    @Embedded val geo: Geo
+    val street: String?= null,
+    val suite: String?= null,
+    val city: String?= null,
+    val zipcode: String?= null,
+    @Embedded val geo: Geo? = null
 )
